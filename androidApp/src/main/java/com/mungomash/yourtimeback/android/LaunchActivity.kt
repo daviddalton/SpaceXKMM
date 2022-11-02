@@ -3,8 +3,13 @@ package com.mungomash.yourtimeback.android
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.gestures.ScrollableState
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
@@ -27,7 +32,7 @@ class LaunchActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Column {
+                    Column(modifier = Modifier.verticalScroll(rememberScrollState())) {
                         val scope = rememberCoroutineScope()
                         var rocketLaunch by remember { mutableStateOf<RocketLaunch?>(null) }
                         LaunchedEffect(true) {
