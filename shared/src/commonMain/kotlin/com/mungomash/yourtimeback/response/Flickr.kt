@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class FlickrResponse(
+data class Flickr(
     @SerialName("small")
     val small: String,
     @SerialName("original")

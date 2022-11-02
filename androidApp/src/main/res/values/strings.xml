@@ -1,3 +1,5 @@
 <resources>
     <string name="title_activity_launch">LaunchActivity</string>
+    <string name="title_activity_launch_site">LaunchSiteActivity</string>
+    <string name="app_name">Rockets!</string>
 </resources>

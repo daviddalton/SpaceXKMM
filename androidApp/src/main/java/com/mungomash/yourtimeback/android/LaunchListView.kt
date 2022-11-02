@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
@@ -15,6 +16,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.mungomash.yourtimeback.response.RocketLaunch
+import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
 
 @Composable
 fun LaunchListView(launch: RocketLaunch, context: Context) {
@@ -37,29 +40,18 @@ fun LaunchListView(launch: RocketLaunch, context: Context) {
                         ),
                         modifier = Modifier.padding(4.dp)
                     )
-                    Row(modifier = Modifier.fillMaxWidth()) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        val date = OffsetDateTime.parse(launch.launchDateUTC)
                         Image(imageVector = ImageVector.vectorResource(id = R.drawable.flight_takeoff_48px), contentDescription = "")
-                        Text(text = launch.launchDateUTC)
+                        Text(text = date.format(DateTimeFormatter.RFC_1123_DATE_TIME))
                         Text(text = " | ")
                         Image(imageVector = ImageVector.vectorResource(id = R.drawable.rocket_launch_48px), contentDescription = "")
                         Text(text = launch.flightNumber.toString())
                     }
                 }
-            }
-            BasicGreyDivider()
-            launch.links?.webcast?.let {
-                SimpleClickableText(it, it)
-            }
-            BasicGreyDivider()
-            launch.links?.article?.let {
-                Row {
-                    Image(imageVector = ImageVector.vectorResource(id = R.drawable.newspaper_48px), contentDescription = "")
-                    SimpleClickableText(it, it)
-                }
-            }
-            BasicGreyDivider()
-            launch.links?.wikipedia?.let {
-                SimpleClickableText("Wiki Page", it)
             }
         }
     }
